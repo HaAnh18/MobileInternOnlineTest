@@ -52,12 +52,16 @@ struct ContentView: View {
                 
                 
                 Button(action: {
+                    // Calls the fetchCurrencyConverter function with the specified parameters `from`, `to`, and `amount` and provides a completion handler
                     converterVM.fetchCurrencyConverter(from: from, to: to, amount: amount) { info in
+                        
+                        // Checks if converterInfo is non-nil and if it contains a rate for the target currency (`to`)
                         if let info = converterVM.converterInfo,
                            let rate = info.rates[to]
                         {
+                            // Converts rateForAmount to Double and assigns it to a local variable
                             let rateForAmount = Double(rate.rateForAmount)
-                            self.rateForAmount = rateForAmount
+                            self.rateForAmount = rateForAmount  // Updates the rateForAmount property in the view
                         }
                     }
                     
@@ -82,7 +86,10 @@ struct ContentView: View {
                         Spacer()
                         
                         Text(amount)
+                            .font(Font.custom("Quicksand-Medium", size: 20))
+                        
                         Text(from)
+                            .font(Font.custom("Quicksand-Medium", size: 20))
                         
                     }
                     
@@ -93,7 +100,10 @@ struct ContentView: View {
                         Spacer()
                         
                         Text(String(format: "%.2f", rateForAmount!))
+                            .font(Font.custom("Quicksand-Medium", size: 20))
+                        
                         Text(to)
+                            .font(Font.custom("Quicksand-Medium", size: 20))
                         
                     }
                 }
@@ -111,6 +121,7 @@ struct ContentView: View {
         
     }
     
+    // Checks if the input amount is a valid positive Double
     func isValidAmount(amount: String) -> Bool {
         if let number = Double(amount), number > 0 {
             return true
@@ -119,6 +130,7 @@ struct ContentView: View {
         }
     }
     
+    // Checks if both `from` and `to` fields are non-empty
     func isAllFilled() -> Bool {
         if from != "" && to != "" {
             return true
