@@ -6,7 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		391B34252CD3536B00289DC3 /* Question2A.java in Sources */ = {isa = PBXBuildFile; fileRef = 391B34242CD3536B00289DC3 /* Question2A.java */; };
+		391B34272CD3537100289DC3 /* Question2B.java in Sources */ = {isa = PBXBuildFile; fileRef = 391B34262CD3537100289DC3 /* Question2B.java */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		391B34242CD3536B00289DC3 /* Question2A.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = Question2A.java; sourceTree = "<group>"; };
+		391B34262CD3537100289DC3 /* Question2B.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = Question2B.java; sourceTree = "<group>"; };
 		39EC2FA42CCE2150003ED094 /* CurrencyConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -42,9 +49,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		391B34232CD3533300289DC3 /* CodingChallenge */ = {
+			isa = PBXGroup;
+			children = (
+				391B34242CD3536B00289DC3 /* Question2A.java */,
+				391B34262CD3537100289DC3 /* Question2B.java */,
+			);
+			path = CodingChallenge;
+			sourceTree = "<group>";
+		};
 		39EC2F9B2CCE2150003ED094 = {
 			isa = PBXGroup;
 			children = (
+				391B34232CD3533300289DC3 /* CodingChallenge */,
 				39EC2FA62CCE2150003ED094 /* CurrencyConverter */,
 				39EC2FA52CCE2150003ED094 /* Products */,
 			);
@@ -132,6 +149,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				391B34252CD3536B00289DC3 /* Question2A.java in Sources */,
+				391B34272CD3537100289DC3 /* Question2B.java in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
