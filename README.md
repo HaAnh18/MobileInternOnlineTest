@@ -35,6 +35,7 @@
 
 #### For the code skill assessment
 - Visual Studio Code (VSC) / IntelliJ IDEA
+- Language: Java
 
 ## Author
 - Nguyen Tran Ha Anh 
