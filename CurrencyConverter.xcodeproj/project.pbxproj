@@ -28,6 +28,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		391B342D2CD3619100289DC3 /* Screenshot */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Screenshot;
+			sourceTree = "<group>";
+		};
 		39EC2FA62CCE2150003ED094 /* CurrencyConverter */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -61,6 +66,7 @@
 		39EC2F9B2CCE2150003ED094 = {
 			isa = PBXGroup;
 			children = (
+				391B342D2CD3619100289DC3 /* Screenshot */,
 				391B34232CD3533300289DC3 /* CodingChallenge */,
 				39EC2FA62CCE2150003ED094 /* CurrencyConverter */,
 				39EC2FA52CCE2150003ED094 /* Products */,
@@ -91,6 +97,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				391B342D2CD3619100289DC3 /* Screenshot */,
 				39EC2FA62CCE2150003ED094 /* CurrencyConverter */,
 			);
 			name = CurrencyConverter;

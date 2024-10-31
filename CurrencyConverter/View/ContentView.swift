@@ -20,7 +20,7 @@ struct ContentView: View {
     var body: some View {
         GeometryReader { geo in
             if networkMonitor.isActive {
-                VStack(alignment: .leading, spacing: horizontalSizeClass == .compact ? 40 : 100) {
+                VStack(alignment: .leading, spacing: horizontalSizeClass == .compact ? 30 : 100) {
                     
                     Text("Currency Converter")
                         .font(Font.custom("Quicksand-Bold", size: 45))
