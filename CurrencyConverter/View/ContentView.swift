@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    @StateObject private var networkMonitor = NetworkingMonitor()
     @State private var from: String = ""
     @State private var to: String = ""
     @State private var amount: String = ""
@@ -17,107 +19,126 @@ struct ContentView: View {
     
     var body: some View {
         GeometryReader { geo in
-            VStack(alignment: .leading, spacing: 40) {
-                Text("Currency Converter")
-                    .font(Font.custom("Quicksand-Bold", size: 45))
-                
-                VStack(alignment: .leading) {
-                    Text("From")
-                        .font(Font.custom("Quicksand-Medium", size: 20))
+            if networkMonitor.isActive {
+                VStack(alignment: .leading, spacing: horizontalSizeClass == .compact ? 40 : 100) {
                     
-                    DropDown(selection: $from, options: options)
-                }
-                .zIndex(2)
-                
-                
-                VStack(alignment: .leading) {
-                    Text("To")
-                        .font(Font.custom("Quicksand-Medium", size: 20))
+                    Text("Currency Converter")
+                        .font(Font.custom("Quicksand-Bold", size: 45))
+                        .padding()
                     
-                    DropDown(selection: $to, options: options)
-                }
-                .zIndex(1)
-                
-                VStack(alignment: .leading) {
-                    Text("Amount")
-                        .font(Font.custom("Quicksand-Medium", size: 20))
-                    
-                    TextField("Type the amount", text: $amount)
-                        .padding(10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(.black.opacity(0.1) ,lineWidth: 1)
-                                .shadow(radius: 4))
-                }
-                
-                
-                Button(action: {
-                    // Calls the fetchCurrencyConverter function with the specified parameters `from`, `to`, and `amount` and provides a completion handler
-                    converterVM.fetchCurrencyConverter(from: from, to: to, amount: amount) { info in
+                    VStack(alignment: .leading) {
+                        Text("From")
+                            .font(Font.custom("Quicksand-Medium", size: 20))
                         
-                        // Checks if converterInfo is non-nil and if it contains a rate for the target currency (`to`)
-                        if let info = converterVM.converterInfo,
-                           let rate = info.rates[to]
-                        {
-                            // Converts rateForAmount to Double and assigns it to a local variable
-                            let rateForAmount = Double(rate.rateForAmount)
-                            self.rateForAmount = rateForAmount  // Updates the rateForAmount property in the view
+                        DropDown(selection: $from, options: options)
+                    }
+                    .zIndex(2)
+                    
+                    
+                    VStack(alignment: .leading) {
+                        Text("To")
+                            .font(Font.custom("Quicksand-Medium", size: 20))
+                        
+                        DropDown(selection: $to, options: options)
+                    }
+                    .zIndex(1)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Amount")
+                            .font(Font.custom("Quicksand-Medium", size: 20))
+                        
+                        TextField("Type the amount", text: $amount)
+                            .padding(10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(.black.opacity(0.1) ,lineWidth: 1)
+                                    .shadow(radius: 4))
+                    }
+                    
+                    
+                    Button(action: {
+                        // Calls the fetchCurrencyConverter function with the specified parameters `from`, `to`, and `amount` and provides a completion handler
+                        converterVM.fetchCurrencyConverter(from: from, to: to, amount: amount) { info in
+                            
+                            // Checks if converterInfo is non-nil and if it contains a rate for the target currency (`to`)
+                            if let info = converterVM.converterInfo,
+                               let rate = info.rates[to]
+                            {
+                                // Converts rateForAmount to Double and assigns it to a local variable
+                                let rateForAmount = Double(rate.rateForAmount)
+                                self.rateForAmount = rateForAmount  // Updates the rateForAmount property in the view
+                            }
+                        }
+                        
+                    }, label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(isValidAmount(amount: amount) && isAllFilled() ? .blue : .gray)
+                                .frame(height: 60)
+                                
+                            Text("Convert")
+                                .foregroundColor(.white)
+                                .font(Font.custom("Quicksand-Medium", size: 20))
+                        }
+                    })
+                    .disabled(!isValidAmount(amount: amount) || !isAllFilled())
+                    
+                    if (rateForAmount != nil) {
+                        HStack {
+                            Text("From: ")
+                                .font(Font.custom("Quicksand-Medium", size: 20))
+                            
+                            Spacer()
+                            
+                            Text(amount)
+                                .font(Font.custom("Quicksand-Medium", size: 20))
+                            
+                            Text(from)
+                                .font(Font.custom("Quicksand-Medium", size: 20))
+                            
+                        }
+                        
+                        HStack {
+                            Text("To: ")
+                                .font(Font.custom("Quicksand-Medium", size: 20))
+                            
+                            Spacer()
+                            
+                            Text(String(format: "%.2f", rateForAmount!))
+                                .font(Font.custom("Quicksand-Medium", size: 20))
+                            
+                            Text(to)
+                                .font(Font.custom("Quicksand-Medium", size: 20))
+                            
                         }
                     }
                     
-                }, label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(isValidAmount(amount: amount) && isAllFilled() ? .blue : .gray)
-                            .frame(height: 60)
-                            
-                        Text("Convert")
-                            .foregroundColor(.white)
-                            .font(Font.custom("Quicksand-Medium", size: 20))
-                    }
-                })
-                .disabled(!isValidAmount(amount: amount) || !isAllFilled())
-                
-                if (rateForAmount != nil) {
-                    HStack {
-                        Text("From: ")
-                            .font(Font.custom("Quicksand-Medium", size: 20))
-                        
-                        Spacer()
-                        
-                        Text(amount)
-                            .font(Font.custom("Quicksand-Medium", size: 20))
-                        
-                        Text(from)
-                            .font(Font.custom("Quicksand-Medium", size: 20))
-                        
-                    }
+                    Spacer()
                     
-                    HStack {
-                        Text("To: ")
-                            .font(Font.custom("Quicksand-Medium", size: 20))
+                }
+                .padding(.horizontal, 30)
+                .frame(width: geo.size.width, height: geo.size.height)
+            } else {
+                ZStack {
+                    VStack(spacing: 30) {
+                        Text("No Internet Connection")
+                            .font(Font.custom("Quicksand-Bold", size: 40))
                         
-                        Spacer()
-                        
-                        Text(String(format: "%.2f", rateForAmount!))
-                            .font(Font.custom("Quicksand-Medium", size: 20))
-                        
-                        Text(to)
-                            .font(Font.custom("Quicksand-Medium", size: 20))
-                        
+                        Image(systemName: "x.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.red)
                     }
                 }
-                
-                Spacer()
-                
+                .frame(width: geo.size.width, height: geo.size.height)
             }
-            .padding(.horizontal, 30)
         }
         .onAppear {
             converterVM.fetchCurrencyList() { _ in
                 options = converterVM.currencyList
             }
         }
+        
         
     }
     

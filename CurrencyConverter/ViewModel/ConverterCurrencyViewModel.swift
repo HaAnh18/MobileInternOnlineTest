@@ -10,7 +10,7 @@ import Foundation
 class ConverterCurrencyViewModel: ObservableObject {
     @Published var converterInfo: ConverterCurrency?
     @Published var currencyList: [String] = []
-    
+
     //Fetches the list of available currencies from the API
     // - Parameter completion: A closure that returns the list of currency codes as an optional array
     func fetchCurrencyList(completion: @escaping ([String]?) -> Void) {

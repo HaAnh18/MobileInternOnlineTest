@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - ConverterCurrency
-/// A model representing the currency conversion data, including base currency, conversion rates, and status.
+// A model representing the currency conversion data, including base currency, conversion rates, and status.
 struct ConverterCurrency: Codable {
     let baseCurrencyCode, baseCurrencyName, amount, updatedDate: String
     let rates: [String: Rate]  // Dictionary of rates with currency codes as keys
@@ -25,7 +25,7 @@ struct ConverterCurrency: Codable {
 }
 
 // MARK: - Rate
-/// A model representing the rate details for a particular currency, including currency name, rate, and rate for a given amount.
+// A model representing the rate details for a particular currency, including currency name, rate, and rate for a given amount.
 struct Rate: Codable {
     let currencyName, rate, rateForAmount: String  // Name of the currency, exchange rate, and calculated rate for a specified amount
 
