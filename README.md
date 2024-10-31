@@ -33,5 +33,8 @@
 - SwiftUI Framework
 - Target Deployment iOS 17.5
 
+#### For the code skill assessment
+- Visual Studio Code (VSC) / IntelliJ IDEA
+
 ## Author
 - Nguyen Tran Ha Anh 
