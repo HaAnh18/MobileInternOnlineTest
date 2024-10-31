@@ -19,10 +19,10 @@
   </tr>
   <tr>
     <td><a href="https://youtu.be/-xv8CMPaWu8">
-    <img src="./Screenshots/CurrencyConverter.png" width="360" alt="Watch the video">
+    <img src="./Screenshot/CurrencyConverter.png" width="360" alt="Watch the video">
 </a></td>
         <td><a href="https://youtu.be/u5he0kLE-AI">
-    <img src="./Screenshots/CodeSkillAssessment.png" width="360" alt="Watch the video">
+    <img src="./Screenshot/CodeSkillAssessment.png" width="360" alt="Watch the video">
 </a></td>
    </tr>
 
