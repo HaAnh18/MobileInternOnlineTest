@@ -18,6 +18,7 @@ public class Question2A {
 }
 
 class ProductList {
+    // Constructor to initialize the product list
     ArrayList<Product> productList;
 
     public ProductList() {
@@ -29,6 +30,12 @@ class ProductList {
         productList.add(newProduct);
     }
 
+    /**
+         * Calculates the total inventory value by summing up
+         * the value (price * quantity) of each product.
+         *
+         * @return The total inventory value as a double
+    */
     public double calculateTotalInventoryValue() {
         double total = 0;
         for (Product product : productList) {
@@ -39,6 +46,11 @@ class ProductList {
         return total;
     }
 
+    /**
+         * Finds the most expensive product in the list.
+         *
+         * @return The name of the most expensive product or a message if the list is empty
+    */
     public String findMostExpensive() {
         if (productList.size() < 1) {
             return "Don't have any item.";
@@ -54,7 +66,13 @@ class ProductList {
 
         return mostExpensiveP.name;
     }
-
+    
+    /**
+        * Checks if a product with the specified name exists in the inventory.
+        *
+        * @param name The name of the product to check
+        * @return true if the product is found, false otherwise
+    */
     public boolean checkProductInStock(String name) {
         for (Product product : productList) {
             if (product.name.equals(name)) {
@@ -64,6 +82,13 @@ class ProductList {
         return false;
     }
 
+    /**
+        * Sorts the product list based on the specified order and option (Price or Quantity).
+        * Then displays the sorted list.
+        *
+        * @param order  Specifies the sort order ("Ascending" or "Descending")
+        * @param option Specifies the sort criterion ("Price" or "Quantity")
+    */
     public void sortProductList(String order, String option) {
         if (order.equals("Ascending") && option.equals("Price")) {
             System.out.println("Sort by price in ascending order: ");
